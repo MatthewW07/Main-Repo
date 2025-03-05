@@ -2,5 +2,4 @@ THIS IS A README FILE
 
 This is my second repository I made to learn Git.
 
-There should be three files in this repository that use python's turtle module
-to make some cool recursive drawings.
+This is where I store the coding projects I have made so far.
