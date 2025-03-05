@@ -139,10 +139,11 @@ def win(cells):
         return winner
     
     # check for tie
-    total = 0
+    open = False
     for i in cells:
-        total += sum(i)
-    if total >= 9:
+        if 0 in i:
+            open = True
+    if open == False:
         winner = "Tie"
         return winner
     return False
