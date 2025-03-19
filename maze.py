@@ -23,6 +23,7 @@ maze = t.Turtle()
 maze.pensize(CELLSIZE - 5)
 maze.speed(0)
 maze.color("lightgray")
+maze.hideturtle()
 
 # Start / End pen
 style = t.Turtle()
@@ -30,6 +31,12 @@ style.pensize(CELLSIZE-6)
 style.color("red")
 style.shape("circle")
 style.pu()
+
+# Runner pen
+run = t.Turtle()
+run.pensize(4)
+run.color("blue")
+run.speed(0)
 
 # Grid to track unvisited cells
 grid = [[False] * COLS for _ in range(ROWS)]
@@ -63,7 +70,6 @@ def getNeighbors(row, col):
 # 3: If no neighbor available: pop a cell from DFS stack and repeat
 # 4: If no neighbor available AND stack empty: maze is complete
 def mazeGenerator(start=(0,0)):
-    firstPath = True
     cur = start
     maze.pu()
     coordinates(cur[0], cur[1])
@@ -76,16 +82,39 @@ def mazeGenerator(start=(0,0)):
             cur = next
             coordinates(cur[0], cur[1])
         elif len(DFSstack) > 0:
-            if firstPath:
-                firstPath = False
-                style.stamp()
             cur = DFSstack.pop()
             coordinates(cur[0], cur[1])
         else:
+            style.stamp()
             return
+        
+# Movement Functions
+# Movement Functions
+def right():
+    run.setheading(0)
+def up():
+    run.setheading(90)
+def left():
+    run.setheading(180)
+def down():
+    run.setheading(270)
+def move():
+    run.fd(CELLSIZE)
+
+# Main Loop
 
 mazeGenerator()
+style.goto((ROWS-1) * CELLSIZE * 0.5, - (COLS-1) * CELLSIZE * 0.5)
 style.stamp()
+bg.tracer(True)
 
-
+run.pu()
+run.goto(-(ROWS-1) * CELLSIZE * 0.5 - (0.5 * CELLSIZE), (COLS-1) * CELLSIZE * 0.5 + (0.5 * CELLSIZE))
+run.pd()
+bg.onkeypress(right, "d")
+bg.onkeypress(up, "w")
+bg.onkeypress(left, "a")
+bg.onkeypress(down, "s")
+bg.onkeypress(move, "g")
+bg.listen()
 bg.exitonclick()
