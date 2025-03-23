@@ -1,0 +1,14 @@
+[
+  {
+    "problem": "Solve for x in 2x+3=7",
+    "solution": "x = 2"
+  },
+  {
+    "problem": "Simplify (3+5)*2",
+    "solution": "16"
+  },
+  {
+    "problem": "What is the derivative of x^2?",
+    "solution": "2x"
+  }
+]

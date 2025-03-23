@@ -94,7 +94,10 @@ def moveAsteroids():
     alive = asteroids[i][1]
     if alive:
       obj.fd(ASTEROID_SPEED)
+    else:
+      del obj
     wn.update()
+  print("asteroids: ", asteroids)
   wn.ontimer(moveAsteroids, 10)
   collide()
 
@@ -113,7 +116,9 @@ def lasers():
         asteroids[j][0].hideturtle()
         
     if (x < -520) or (x > 520) or (y < -370) or (y > 370):
-      shots.pop(i)
+      obj = shots.pop(i)
+      del obj
+  print("shots:", shots)
   wn.update()
   if len(shots) > 0:
     wn.ontimer(lasers, 10)
