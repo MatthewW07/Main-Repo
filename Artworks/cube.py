@@ -1,107 +1,158 @@
 """
-This program renders a rotating cube with Pygame
-The speed and direction of the rotation can be controled by the user
-
+Description:
+This program draws and rotates a cube using Pygame.
+The user may change the direction of rotation with their mouse
+Friction is also added to slow the cube down over time
 """
 
+# TODO:
+# - Add comments to the code
+# - Finalize the code and make it look nice
 
-# Rotating Cube
+# ----- IMPORTS -----
 
 import math as m
 import pygame as py
 
-WIDTH = 600
-HEIGHT = 600
+# ----- CONSTANTS -----
 
-BackColor = (0,0,0)
-Color = (255, 255, 255)
-Speed = 1
-distance = 500
+WIDTH        =  600       # Screen width
+HEIGHT       =  600       # Screen height
+BGCOLOR      =  'black'   # Background color
+CUBECOLOR    =  'white'   # Color of the cube lines
+THICK        =  3         # Line thickness
+DISTANCE     =  500       # Distance from cube to camera
+K1           =  500       # Perspective constant
+FPS          =  20        # Speed of animation
+SENSITIVITY  =  0.0005    # Sensitivity for user input
+CUBESIZE     =  100       # Size of the cube on the screen
 
-SCALING = 500
-FPS = 20
+# ----- GLOBAL VARIABLES -----
 
-A = 0.02
-B = 0.08
-C = 0.04
-cubeWidth = 100
+running       =  True   # Allows for pausing
+mouseDownPos  =  None   # Starting point for rotation by the user
 
+# Define initial rotation angles
+A = 0.00 # x-axis
+B = 0.00 # y-axis
+
+# List of the cube's vertices in R^3
 Vertices = [
-    [1, 1, 1],
-    [-1, 1, 1],
-    [1, -1, 1],
-    [1, 1, -1],
-    [-1, -1, 1],
-    [1, -1, -1],
-    [-1, 1, -1],
-    [-1, -1, -1]
+  [+1, +1, +1],
+  [-1, +1, +1],
+  [+1, -1, +1],
+  [+1, +1, -1],
+  [-1, -1, +1],
+  [+1, -1, -1],
+  [-1, +1, -1],
+  [-1, -1, -1],
 ]
 
+# List of the connections between vertices, where numbers represent indices of 'Vertices' list
 Edges = [
-    [0,1], [3,6],
-    [1,4], [6,7],
-    [2,4], [5,7],
-    [0,2], [3,5],
-    [2,5], [1,6],
-    [0,3], [4,7]
+  [0, 1], [3, 6],
+  [1, 4], [6, 7],
+  [2, 4], [5, 7],
+  [0, 2], [3, 5],
+  [2, 5], [1, 6],
+  [0, 3], [4, 7]
 ]
 
+# ----- TRANSFORMATION FUNCTIONS -----
 
+# Rotates the given point using angles A, B, and C
 def rot(x, y, z):
-    # x axis
-    Rx, Ry, Rz = x, y * m.cos(A) - z * m.sin(A), y * m.sin(A) + z * m.cos(A)
-    # y axis
-    Sx, Sy, Sz = Rx * m.cos(B) + Rz * m.sin(B), Ry, Rz * m.cos(B) - Rx * m.sin(B)
-    # z axis
-    Fx, Fy, Fz = Sx * m.cos(C) - Sy * m.sin(C), Sx * m.sin(C) + Sy * m.cos(C), Sz
-    return round(Fx,6), round(Fy,6), round(Fz,6)
+  # Rotation around x-axis
+  xAxis_x = x
+  xAxis_y = y * m.cos(A) - z * m.sin(A)
+  xAxis_z = y * m.sin(A) + z * m.cos(A)
 
+  # Rotation around y-axis
+  yAxis_x = xAxis_x * m.cos(B) + xAxis_z * m.sin(B)
+  yAxis_y = xAxis_y
+  yAxis_z = xAxis_z * m.cos(B) - xAxis_x * m.sin(B)
+
+  return round(yAxis_x, 6), round(yAxis_y, 6), round(yAxis_z, 6)
+
+# Projects the given point using perspective
 def project(x, y, z):
-    if z + distance == 0:
-        z += 0.1
-    factor = SCALING / (z + distance)
-    #factor = 1
-    projX = int(WIDTH / 2 - x * factor)
-    projY = int(HEIGHT / 2 + y * factor)
-    return projX, projY
+  # Avoid dividing by 0
+  if z + DISTANCE == 0:
+    z += 0.1
 
-def cube(screen):
-    Points = []
-    global Vertices
-    for v in range(len(Vertices)):
-        vertex = Vertices[v]
-        x, y, z = rot(vertex[0], vertex[1], vertex[2])
-        Vertices[v] = [x,y,z]
-        Points.append(project(x * cubeWidth, y * cubeWidth, z * cubeWidth))
-    for edge in Edges:
-        py.draw.line(screen, Color, Points[edge[0]], Points[edge[1]])
+  # Transform (x, y, z) coordinates into (x, y) coordinates with perspective
+  factor = K1 / (z + DISTANCE)
+  projX = int(WIDTH / 2 - x * factor)
+  projY = int(HEIGHT / 2 + y * factor)
 
-# TODO:
-# Add controls to change the speed and direction of the rotation by the user
-# The speed and direction will be determined by when the user presses and releases their mouse button
-# Add a pause function to stop the rotation when the user presses the 'p' key
+  return projX, projY
 
-def main():
-    py.init()
-    py.display.set_caption("Rotating Cube")
-    screen = py.display.set_mode((WIDTH, HEIGHT))
-    clock = py.time.Clock()
+# Function that rotates (and projects) the cube and draws it
+def cube():
+  # Reset the Screen
+  screen.fill(BGCOLOR)
 
-    running = True
-    while running:
-        screen.fill(BackColor)
+  # Temporary Points list to replace the points in Vertices
+  Points = []
+  global Vertices
 
-        for event in py.event.get():
-            if event.type == py.QUIT:
-                py.quit()
-            if event.type == py.K_p:
-                running = not running
+  # Iteration to acquire rotated point
+  for v in range(len(Vertices)):
+    vertex = Vertices[v] # Define the point
+    x, y, z = rot(vertex[0], vertex[1], vertex[2]) # Rotate the point
+    Vertices[v] = [x,y,z] # Change Vertices list with new point
+    Points.append(project(x * CUBESIZE, y * CUBESIZE, z * CUBESIZE)) # Add rotated point to our list
 
-        cube(screen)
-        py.display.flip()
-        clock.tick(FPS)
+  # Iteration to draw projected point
+  for edge in Edges:
+    py.draw.line(screen, CUBECOLOR, Points[edge[0]], Points[edge[1]], THICK)
 
-    py.quit()
+  # Update the screen
+  py.display.flip()
+  clock.tick(FPS)
 
-if __name__ == "__main__":
-    main()
+# Initiate Pygame
+py.init()
+py.display.set_caption("Rotating Cube")
+screen = py.display.set_mode((WIDTH, HEIGHT))
+clock = py.time.Clock()
+
+# Animate the movement through continuous calling of the cube() function
+while True:
+  # Apply friction by reducing the rotation angle values
+  A *= 0.95
+  B *= 0.95
+
+  # Quit the game if window closed
+  for event in py.event.get():
+    if event.type == py.QUIT:
+      py.quit()
+
+    # Pause the animation
+    elif event.type == py.KEYDOWN:
+      if event.key == py.K_SPACE:
+        running = not running
+
+    # Implementing user input for rotation speed
+    elif event.type == py.MOUSEBUTTONDOWN:
+      if event.button == 1:
+        mouseDownPos = event.pos
+        
+    elif event.type == py.MOUSEBUTTONUP:
+      if event.button == 1 and mouseDownPos is not None:
+        # Acquire points
+        x1, y1 = mouseDownPos
+        x2, y2 = event.pos
+        # Calculate the differences
+        changeX = x2 - x1
+        changeY = y2 - y1
+        # Change Rotation speed
+        # Order is reversed because a horizontal swipe (change in x) should change the y-axis
+        B += changeX * SENSITIVITY
+        A += changeY * SENSITIVITY
+        # Resent position where mouse is initially pressed
+        mouseDownPos = None
+
+  # Update to next frame
+  if running:
+    cube()
