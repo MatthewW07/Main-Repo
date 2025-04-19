@@ -1,3 +1,10 @@
+"""
+This program renders a rotating cube with Pygame
+The speed and direction of the rotation can be controled by the user
+
+"""
+
+
 # Rotating Cube
 
 import math as m
@@ -5,11 +12,13 @@ import pygame as py
 
 WIDTH = 600
 HEIGHT = 600
+
 BackColor = (0,0,0)
 Color = (255, 255, 255)
 Speed = 1
 distance = 500
-K1 = 500
+
+SCALING = 500
 FPS = 20
 
 A = 0.02
@@ -50,13 +59,13 @@ def rot(x, y, z):
 def project(x, y, z):
     if z + distance == 0:
         z += 0.1
-    factor = K1 / (z + distance)
+    factor = SCALING / (z + distance)
     #factor = 1
     projX = int(WIDTH / 2 - x * factor)
     projY = int(HEIGHT / 2 + y * factor)
     return projX, projY
 
-def cube():
+def cube(screen):
     Points = []
     global Vertices
     for v in range(len(Vertices)):
@@ -67,24 +76,32 @@ def cube():
     for edge in Edges:
         py.draw.line(screen, Color, Points[edge[0]], Points[edge[1]])
 
+# TODO:
+# Add controls to change the speed and direction of the rotation by the user
+# The speed and direction will be determined by when the user presses and releases their mouse button
+# Add a pause function to stop the rotation when the user presses the 'p' key
 
-py.init()
-py.display.set_caption("Rotating Cube")
-screen = py.display.set_mode((WIDTH, HEIGHT))
-clock = py.time.Clock()
+def main():
+    py.init()
+    py.display.set_caption("Rotating Cube")
+    screen = py.display.set_mode((WIDTH, HEIGHT))
+    clock = py.time.Clock()
 
-running = True
-while True:
-    screen.fill(BackColor)
+    running = True
+    while running:
+        screen.fill(BackColor)
 
-    for event in py.event.get():
-        if event.type == py.QUIT:
-            py.quit()
-        if event.type == py.K_SPACE:
-            running = not running
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                py.quit()
+            if event.type == py.K_p:
+                running = not running
 
-    cube()
-    py.display.flip()
-    clock.tick(FPS)
+        cube(screen)
+        py.display.flip()
+        clock.tick(FPS)
 
-py.quit()
+    py.quit()
+
+if __name__ == "__main__":
+    main()
