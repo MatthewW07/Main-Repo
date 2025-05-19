@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Website</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="homeStyle.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <header class="header">
+    <a href="" class="logo">Matthew <span class="logo-text">Wang</span></a>
+    <nav>
+      <ul class="navbar">
+        <a href="index.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Projects</a>
+        <a href="#">Contact</a>
+        <a href="extra.html">Extra</a>
+        <a onclick=showDropdown() class='bx bx-menu'></a> 
+      </ul>
+      <ul class="dropdown">
+        <a onclick=hideDropdown() class='bx bx-x'></a>
+        <a href="index.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Projects</a>
+        <a href="#">Contact</a>
+        <a href="extra.html">Extra</a>
+      </ul>
+    </nav>
+  </header>
+
+
+  <section class="home" id="home">
+    <div class="home-content">
+      <h1>Hey, I'm <span class="name">Matthew Wang</span></h1>
+      <h3>I'm a <span class="typed" id="typed"></span><label for=""></label></h3>
+      <p>BIPPITY-BOPPITY-BOO!!! I need a job this summer...</p>
+      <div class="btn-box">
+        <a href="#">Hire Me</a>
+        <a href="#">Let's Talk</a>
+      </div>
+    </div>
+
+    <script>
+      function showDropdown () {
+        const dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'flex';
+      }
+
+      function hideDropdown() {
+        const dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'none';
+      }
+
+      const options = {
+        strings: ['Frontend Dev.', 'Backend Dev.', 'Student', 'Programmer'],
+        typeSpeed: 100,
+        backSpeed: 50,
+        backDelay: 1500,
+        loop: true,
+        showCursor: true,
+        cursorChar: '|'
+      };
+      new Typed('#typed', options);
+    </script>
+
+    <div class="home-sci">
+      <a href="#"><i class="bx bxl-github"></i></a>
+      <a href="#"><i class="bx bxl-twitter"></i></a>
+      <a href="#"><i class="bx bxl-linkedin"></i></a>
+    </div>
+
+    <span class="home-imgHover"></span>
+  </section>
+
+
+  <div class="divider"></div>
+
+
+  <section class="about" id="about">
+    <!-- Have an elliptical image background with some glow behind it to introduce this section -->
+    <div class="about-title">
+      <h1>About Me</h1>
+    </div>
+
+
+    <!-- Include a box labeled "Skills" in the top right. Have a list of Frontend skills on the left and Backend skills on the right, aligned vertically on mobile-->
+    <div class="skills">
+      <h3>Skills</h3>
+      <div class="frontend-skills">
+        <h4>Frontend</h4>
+        <ul>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>React</li>
+        </ul>
+      </div>
+      <div class="backend-skills">
+        <h4>Other Skills</h4>
+        <ul>
+          <li>Python</li>
+          <l1>Git</l1>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Similar to the skills div, but without the two columns. Rather, we will have a seperate row for each experience. For now, just one-->
+    <div class="experience">
+      <h3>Experience</h3>
+      <div class="experience-box">
+        <div class="expOne">
+          <h4>Frontend Developer</h4>
+          <p>Feb 2025 - May 2025</p>
+        </div>
+      </div>
+    </div>
+
+
+
+  </section>
+
+
+  <section class="footer">
+    <div class="footer-content">
+      <h3>Contact Me</h3>
+      <p>Made with HTML and CSS</p>
+      <div class="socials">
+        <a href="#"><i class="bx bxl-github"></i></a>
+        <a href="#"><i class="bx bxl-twitter"></i></a>
+        <a href="#"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </section>
+
+  
+
+</body>
+</html>

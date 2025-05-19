@@ -1,0 +1,327 @@
+
+* {
+  font-family:'Poppins', sans-serif;
+}
+
+
+/* ======== HOME CONTENT ======== */
+
+
+.home {
+  position: relative;
+  height: min(calv(100% + 220px), 110dvh);
+  background: url('/Apps/assets/home.png') no-repeat;
+  background-size: cover;
+  background-position: center top;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 100px;
+  padding-top: 0px;
+}
+
+.home-content {
+  background:rgb(15, 49, 94);
+  max-width: 640px;
+  margin: 0;
+  border-radius: 20px;
+  padding: 30px;
+  margin-top: 150px;
+  align-self: flex-start;
+  box-shadow: 12px 12px 10px rgba(0, 0, 0, 0.4);
+}
+
+.home-content h1 {
+  position: relative;
+  font-size: clamp(1.8rem, calc(7vw + 1rem), 3rem);
+  font-weight: 560;
+  line-height: 1.2;
+}
+
+.home-content h1 .name {
+  color: transparent;
+  background: linear-gradient(-30deg,rgb(27, 189, 253),rgb(17, 131, 212));
+  background-clip: text;
+  text-shadow: 1px 1px 8px rgba(69, 232, 250, 0.2);
+}
+
+.home-content h3 .typed {
+  color: #00abf0;
+}
+
+.typed-cursor {
+  color: #00abf0;
+  font-weight: bold;
+}
+
+.home-content h1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(15, 49, 94);
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.7s;
+}
+
+.home-content h3 {
+  height: min(38px, 10vw);
+  line-height: min(38px, 10vw);
+  overflow: hidden;
+  position: relative;
+  font-size: 32px;
+  font-weight: 550;
+  color:white;
+}
+
+.home-content h3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  size: fixed;
+  background: rgb(15, 49, 94);
+  animation: showRight 1s ease forwards;
+  animation-delay: 0.9s;
+}
+
+.home-content p {
+  position: relative;
+  font-size: 16px;
+  margin: 20px 0 40px;
+}
+
+.home-content p::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(15, 49, 94);
+  animation: showRight 1s ease forwards;
+  animation-delay: 1.05s;
+}
+
+.home-content .btn-box {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: min(345px, 100%);
+  height: 50px;
+  background: rgb(15, 49, 94);
+  border-radius: 8px;
+}
+
+.home-content .btn-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(15, 49, 94);
+  animation: showRight 1s ease forwards;
+  animation-delay: 1.15s;
+  z-index: 2;
+}
+
+.btn-box a {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 100%;
+  background:  #00abf0;
+  border: 3px solid #00abf0;
+  border-radius: 16px;
+  font-size: 19px;
+  color: #081b29;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 1px;
+  z-index: 1;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.btn-box a:hover {
+  color: #00abf0;
+  animation: glow 1.5s infinite alternate;
+}
+
+.btn-box a:nth-child(2) {
+  background: #081b29;
+  color: #00abf0;
+}
+
+.btn-box a:nth-child(2):hover {
+  color: #081b29;
+  animation: glow 1.5s infinite alternate;
+}
+
+.btn-box a:nth-child(2)::before {
+  background: #00abf0;
+}
+
+.btn-box a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #081b29;
+  z-index: -1;
+  transition: 0.3s;
+}
+
+.btn-box a:hover::before {
+  width: 100%;
+}
+
+.home-sci {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  gap: 50px;
+  margin-top: 60px;
+  width: fit-content;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.home-sci a {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width:40px;
+  height: 40px;
+  background: transparent;
+  border: 3px solid rgb(9, 76, 138);
+  border-radius: 50%;
+  font-size: 20px;
+  color: #00abf0;
+  text-decoration: none;
+  z-index: 1;
+  transition: 0.3s;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.6);
+}
+
+.home-sci a:hover {
+  color: #081b29;
+  scale: 1.2;
+  transform: 0.2s;
+  animation: glow 1.5s infinite alternate;
+}
+
+.home-sci a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: radial-gradient(circle, #00abf0,rgb(2, 34, 116));
+  border-radius: 50%;
+  z-index: -1;
+  transition: all 0.3s ease;
+  scale: 1.02;
+}
+
+.home-sci a:hover::before {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ======== ABOUT ======= */
+
+.about {
+  background-image: url(/Apps/assets/about.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.about .about-title {
+  background: transparent;
+  display: flex;
+  justify-content: center;
+}
+
+.about .about-title h1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(/Apps/assets/space.jpg);
+  background-size: cover;
+  background-blend-mode: multiply;
+  background-color: rgba(6, 12, 75, 0.8);
+  height: min(300px, 30dvh);
+  width: min(450px, 45dvw);
+  border: hidden;
+  border-radius: 50%;
+  margin-top: 50px;
+  font-size: clamp(1rem, 4rem, 6rem);
+  z-index: 1;
+  transition: transform 0.2s ease-in-out, animation 0.2s ease-in-out;
+}
+
+.about .about-title h1:hover {
+  animation: glow 1.5s infinite alternate;
+  transform: scale(1.05);
+}
+
+/* KEYFRAMES ANIMATION */
+
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes grow {
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 
+    -0.1em 0 0.4em rgb(0, 213, 255), 
+    +0.1em 0 0.4em rgb(0, 213, 255), 
+    0 0 0.4em rgb(0, 213, 255),
+    0 0 0.4em rgb(0, 213, 255);
+  }
+  to {
+    box-shadow: 
+    -0.2em 0 0.7em rgb(100, 180, 233), 
+    +0.2em 0 0.7em rgb(100, 180, 233), 
+    0 0 0.7em rgb(100, 180, 233),
+    0 0 0.7em rgb(100, 180, 233);
+  }
+}
+
+@media (max-width: 426px) {
+  .home-content .btn-box {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: min(20vh);
+  }
+
+  .home-content .btn-box a {
+    height: 50vh;
+    width: 100%;
+  }
+}
+
