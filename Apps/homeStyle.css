@@ -6,6 +6,10 @@
 
 /* ======== HOME CONTENT ======== */
 
+.accent {
+  padding-left: 1rem;
+  color: #00abf0;
+}
 
 .home {
   position: relative;
@@ -245,12 +249,14 @@
 /* ======== ABOUT ======= */
 
 .about {
-  background-image: url(/Apps/assets/about.png);
+  background-image: url(/Apps/assets/about3.png);
+  background-position-y: 10%;
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .about .about-title {
+  cursor: pointer;
   background: transparent;
   display: flex;
   justify-content: center;
@@ -270,9 +276,10 @@
   border: hidden;
   border-radius: 50%;
   margin-top: 50px;
-  font-size: clamp(1rem, 4rem, 6rem);
+  margin-bottom: 50px;
+  font-size: clamp(1.5rem, 4rem, 8dvw);
   z-index: 1;
-  transition: transform 0.2s ease-in-out, animation 0.2s ease-in-out;
+  transition: transform 0.5s ease-in-out, animation 0.2s ease-in-out;
 }
 
 .about .about-title h1:hover {
@@ -280,7 +287,95 @@
   transform: scale(1.05);
 }
 
+.section-bg {
+  width: 100vw;                    /* full viewport width */
+  position: relative;
+  left: 50%;                       /* shift back into place */
+  right: 50%;
+  margin-left: -50vw;              /* counteract any container padding */
+  margin-right: -50vw;
+  padding: min(40px, 8dvh) 0;      /* vertical spacing */
+}
+
+.skills-bg {
+  background: transparent;
+}
+
+.journey-bg {
+  background: transparent;
+}
+
+/* Skills */
+
+.about .skills {
+  position: relative;
+  background: rgba(8, 27, 41, 0.2);
+  backdrop-filter: blur(10px);
+  border: 4px solid rgba(8, 27, 41, 0.6);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  margin: min(50px, 10dvh) min(80px, 20dvw);
+  padding: min(20px, 4dvh) min(20px, 4dvw);
+}
+
+.about .skills h3 {
+  font-size: min(3rem, 10dvw);
+  padding: min(20px, 4dvh);
+  width: 100%;
+  border-radius: 30px;
+  align-self: center;
+  text-align: center;
+}
+
+.about .coding-skills {
+  background: green;
+  margin: min(20px, 4dvh) 0;
+  padding: min(20px, 4dvh) min(20px, 4dvw);
+  border: 4px solid #093685;
+}
+
+.about .coding-skills h4 {
+  background: blue;
+  padding-right: min(20px, 4dvw);
+  padding-left: min(20px, 4dvw);
+
+}
+
+/* Journey - Included Education and Experience*/
+
+.about .journey {
+  position: relative;
+  background: rgba(8, 27, 41, 0.2);
+  backdrop-filter: blur(10px);
+  border: 4px solid rgba(8, 27, 41, 0.6);
+  border-radius: 40px;
+  display: grid;
+  margin: min(50px, 10dvh) min(80px, 20dvw);
+  padding: min(20px, 4dvh) min(20px, 4dvw);
+}
+
+.about .journey h3 {
+  background: red;
+  font-size: min(3rem, 10dvw);
+  padding: min(20px, 4dvh);
+  width: 100%;
+  border-radius: 30px;
+  text-align: center;
+}
+
+.about .journey .journey-box {
+  width: 50%;
+  background: red;
+  align-items: inline-grid;
+}
+
+
+
 /* KEYFRAMES ANIMATION */
+
+
+
 
 @keyframes showRight {
   100% {
@@ -324,4 +419,3 @@
     width: 100%;
   }
 }
-
