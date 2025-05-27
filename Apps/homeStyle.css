@@ -7,14 +7,13 @@
 /* ======== HOME CONTENT ======== */
 
 .accent {
-  padding-left: 1rem;
   color: #00abf0;
 }
 
 .home {
   position: relative;
   height: min(calv(100% + 220px), 110dvh);
-  background: url('/Apps/assets/home.png') no-repeat;
+  background: url('assets/home.png') no-repeat;
   background-size: cover;
   background-position: center top;
   display: flex;
@@ -215,13 +214,12 @@
   color: #00abf0;
   text-decoration: none;
   z-index: 1;
-  transition: 0.3s;
   box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.6);
 }
 
 .home-sci a:hover {
   color: #081b29;
-  scale: 1.2;
+  scale: 1.05;
   transform: 0.2s;
   animation: glow 1.5s infinite alternate;
 }
@@ -249,14 +247,13 @@
 /* ======== ABOUT ======= */
 
 .about {
-  background-image: url(/Apps/assets/about3.png);
+  background-image: url(assets/about3.png);
   background-position-y: 10%;
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .about .about-title {
-  cursor: pointer;
   background: transparent;
   display: flex;
   justify-content: center;
@@ -267,7 +264,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url(/Apps/assets/space.jpg);
+  background-image: url(assets/space.jpg);
   background-size: cover;
   background-blend-mode: multiply;
   background-color: rgba(6, 12, 75, 0.8);
@@ -282,19 +279,21 @@
   transition: transform 0.5s ease-in-out, animation 0.2s ease-in-out;
 }
 
+/* 
 .about .about-title h1:hover {
   animation: glow 1.5s infinite alternate;
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
+*/
 
 .section-bg {
-  width: 100vw;                    /* full viewport width */
+  width: 100vw;    
   position: relative;
-  left: 50%;                       /* shift back into place */
+  left: 50%;               
   right: 50%;
-  margin-left: -50vw;              /* counteract any container padding */
+  margin-left: -50vw;          
   margin-right: -50vw;
-  padding: min(40px, 8dvh) 0;      /* vertical spacing */
+  padding: min(40px, 8dvh) 0;      
 }
 
 .skills-bg {
@@ -320,6 +319,7 @@
 }
 
 .about .skills h3 {
+  position: relative;
   font-size: min(3rem, 10dvw);
   padding: min(20px, 4dvh);
   width: 100%;
@@ -328,19 +328,114 @@
   text-align: center;
 }
 
-.about .coding-skills {
-  background: green;
-  margin: min(20px, 4dvh) 0;
-  padding: min(20px, 4dvh) min(20px, 4dvw);
-  border: 4px solid #093685;
+.about .skills h3::after {
+  content: '';
+  position: absolute;
+  bottom: 8%;;
+  left: 50%;
+  width: 150px;
+  transform: translateX(-50%);
+  height: 4px;
+  background-color: #00abf0;
 }
 
-.about .coding-skills h4 {
-  background: blue;
-  padding-right: min(20px, 4dvw);
-  padding-left: min(20px, 4dvw);
-
+.about .skills .coding-skills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  grid-gap: 1rem;
+  padding: 1rem 80px;
+  font-size: 1.2rem
 }
+
+.about .skills .coding-skills .skill-box {
+  padding: 1rem;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.about .skills .coding-skills .skill-box:hover > .skill-title:after {
+  width: 35px;
+}
+
+.about .skills .coding-skills .skill-box:hover > .skill-title:before {
+  width: 35px;
+}
+
+.about .skills .coding-skills .skill-box:hover .img {
+  transform: translateY(-10px);
+}
+
+.about .skills .coding-skills .skill-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.about .skills .coding-skills .skill-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  width: 0;
+  height: 4px;
+  border-radius: 2px 0 0 2px;
+  background-color: #00abf0;
+  transition: 0.3s;
+}
+
+.about .skills .coding-skills .skill-title::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 4px;
+  border-radius: 0 2px 2px 0;
+  background-color: #00abf0;
+  transition: 0.3s;
+}
+
+.about .skills .coding-skills .skill-title .img {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  border-radius: 60px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  transition: 0.5s;
+}
+
+.about .skills .coding-skills .skill-title .img::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 120px;
+  background: rgba(100,100,100,0.3);
+  border-radius: 60px 0 0 60px;
+}
+
+.about .skills .coding-skills .skill-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.about .skills .coding-skills .skill-title h2 {
+  color: #ddd;
+  margin-top: 0.5rem;
+  font-size: 2rem;
+}
+
 
 /* Journey - Included Education and Experience*/
 
@@ -406,7 +501,7 @@
   }
 }
 
-@media (max-width: 426px) {
+@media screen and (max-width: 426px) {
   .home-content .btn-box {
     flex-direction: column;
     align-items: center;
@@ -417,5 +512,19 @@
   .home-content .btn-box a {
     height: 50vh;
     width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 769px) {
+  .about .skills .coding-skills {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 2rem 50px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .about .skills .coding-skills {
+    grid-template-columns: 1fr;
   }
 }
